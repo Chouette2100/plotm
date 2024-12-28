@@ -1,0 +1,10 @@
+#UseSSH: true
+#
+#DBhost: 127.0.0.1
+#DBport: 9999
+#
+DBname: ${DBNAME}
+#
+#
+DBuser: ${DBUSER}
+DBpswd: ${DBPW}
