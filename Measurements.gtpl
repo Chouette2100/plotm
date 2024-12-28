@@ -71,6 +71,7 @@ Temperature<br>
 </td>
 </tr>
 </table>
+The source of this program can be found <a href="https://github.com/Chouette2100/plotm">here</a>
 </form>
 </body>
 </html>
