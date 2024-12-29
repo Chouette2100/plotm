@@ -1,3 +1,6 @@
+// Copyright ©2013 The Gonum Authors. All rights reserved.
+// Copyright (c) 2024 chouette2100@gmail.com
+// Refer to https://github.com/gonum/plot/blob/v0.15.0/LICENSE
 package main
 
 import (

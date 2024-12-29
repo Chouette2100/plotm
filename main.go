@@ -1,4 +1,13 @@
+// Copyright © 2024 chouette2100@gmail.com
+// Released under the MIT license
+// https://opensource.org/licenses/mit-license.php
 package main
+//
+//
+/*
+v1.0.1	Make the link description in English.
+v1.0.2	Enable SSL in ServerConfig.yml.
+*/
 
 import (
 	"log"
