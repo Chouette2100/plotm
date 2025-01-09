@@ -176,7 +176,7 @@ func HandlerMeasurements(w http.ResponseWriter, r *http.Request) {
 	Graphd.Uetime = Graphd.Etime.Unix()
 
 	Graphd.Item = make([]Item, 3)
-	Graphd.Item[0] = Item{"Temperature", "°C", 20.0, 30.0, 10,
+	Graphd.Item[0] = Item{"Temperature", "°C", 15.0, 25.0, 5,
 		[]Udevice{
 			{0, "", "checked"},
 			{1, "", ""},

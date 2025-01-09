@@ -7,6 +7,7 @@ package main
 /*
 v1.0.1	Make the link description in English.
 v1.0.2	Enable SSL in ServerConfig.yml.
+v1.0.3	Create and update license.
 */
 
 import (
