@@ -2,23 +2,32 @@
 // Released under the MIT license
 // https://opensource.org/licenses/mit-license.php
 package main
+
 //
 //
-/*
-v1.0.1	Make the link description in English.
-v1.0.2	Enable SSL in ServerConfig.yml.
-v1.0.3	Create and update license.
-*/
 
 import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/go-gorp/gorp"
+
+	"github.com/astaxie/session"
+	_ "github.com/astaxie/session/providers/memory"
 )
 
+/*
+v1.0.1	Make the link description in English.
+v1.0.2	Enable SSL in ServerConfig.yml.
+v1.0.3	Create and update license.
+v1.1.0	Improve the drawing method of Y-axis.
+		Allows saving and loading of configuration data.
+*/
+
+const version="v010100"
 // AHT10 measurement results
 type Aht10 struct {
 	Device      int
@@ -38,11 +47,20 @@ type Scd41 struct {
 	Status      int
 }
 
-var Ch chan int
+/*
+v1.0.1	Make the link description in English.
+v1.0.2	Enable SSL in ServerConfig.yml.
+v1.0.3	Create and update license.
+v1.1.0	Improve the drawing method of Y-axis.
+		Allows saving and loading of configuration data.
+*/
+
+var Chimgfn chan int
+var Chcfgfn chan int
 
 func main() {
-	LoadDenyIp("DenyIp.txt")
-	logfilename := "plotm" + time.Now().Format("20060102") + ".txt"
+
+	logfilename := "plotm_" + version + "_" + time.Now().Format("20060102") + ".txt"
 	logfile, err := os.OpenFile(logfilename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		panic("cannnot open logfile: " + logfilename + err.Error())
@@ -50,6 +68,9 @@ func main() {
 	defer logfile.Close()
 	log.SetOutput(logfile)
 	// log.SetOutput(io.MultiWriter(logfile, os.Stdout))
+	// log.SetOutput(os.Stdout)
+
+	LoadDenyIp("DenyIp.txt")
 
 	//  =============================================
 
@@ -92,13 +113,36 @@ func main() {
 	//  =============================================
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.HandleFunc(rootPath+"/Measurements", HandlerMeasurements)
+	http.HandleFunc(rootPath+"/Count", HandlerCount)
 	//  =============================================
 	go func() {
 		no := 0
-		Ch = make(chan int)
+		Chimgfn = make(chan int)
 		for {
-			Ch <- no
+			Chimgfn <- no
 			no++
+			if no >= 1000 {
+				no = 0
+			}
+		}
+	}()
+	//  =============================================
+	go func() {
+		files, _ := os.ReadDir("YmlFiles")
+		user := "User_00000.yml"
+		for _, f := range files {
+			fname := f.Name()
+			if fname[0:5] == "User_" && fname > user {
+				user = fname
+			}
+		}
+		cfgfn, _ := strconv.Atoi(user[5:10])
+		cfgfn++
+
+		Chcfgfn = make(chan int)
+		for {
+			Chcfgfn <- cfgfn
+			cfgfn++
 		}
 	}()
 	//  =============================================
@@ -119,4 +163,11 @@ func main() {
 		}
 	}
 
+}
+
+var globalSessions *session.Manager
+
+func init() {
+	globalSessions, _ = session.NewManager("memory", "gosessionid", 60*60*24*7)
+	go globalSessions.GC()
 }

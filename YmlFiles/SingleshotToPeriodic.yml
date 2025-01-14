@@ -1,0 +1,113 @@
+btime: 2024-12-24T13:00:00+09:00
+etime: 2024-12-24T15:00:00+09:00
+uetime: 1735020000
+item:
+    - name: Temperature
+      unit: °C
+      vmin: 10
+      vmax: 30
+      vint: 1
+      udev:
+        - devno: 0
+          name: AHT10 X038
+          status: checked
+        - devno: 1
+          name: AHT10 X039
+          status: ""
+        - devno: 3
+          name: SCD41 periodic
+          status: checked
+        - devno: 2
+          name: SCD41 single shot
+          status: checked
+    - name: Humidity
+      unit: '%RH'
+      vmin: 20
+      vmax: 50
+      vint: 1
+      udev:
+        - devno: 0
+          name: AHT10 X038
+          status: checked
+        - devno: 1
+          name: AHT10 X039
+          status: ""
+        - devno: 3
+          name: SCD41 periodic
+          status: checked
+        - devno: 2
+          name: SCD41 single shot
+          status: checked
+    - name: CO2
+      unit: ppm
+      vmin: 0
+      vmax: 4000
+      vint: 1
+      udev:
+        - devno: 3
+          name: SCD41 periodic
+          status: checked
+        - devno: 2
+          name: SCD41 single shot
+          status: checked
+device:
+    - device: 0
+      name: AHT10 X038
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: aht10
+    - device: 1
+      name: AHT10 X039
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: aht10
+    - device: 98
+      name: SCD41 single shot
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        co2: 0
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: scd41
+    - device: 4096
+      name: SCD41 periodic
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        co2: 0
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: scd41
+filename: TAH0011.png
+period: 2 hours
+fperiod: 7200
+fint: 900
+div: 2
+method: R
+rhmax: 50
+rhmin: 20
+vhmax: 10
+vhmin: 0
+ymlfiles:
+    - Default_000.yml
+    - SingleshotToPeriodic.yml
+    - User_0000.yml
+    - User_00001
+    - User_00002
+    - User_00003
+    - User_00004.yml
+    - User_00005.yml
+    - User_00006.yml
+nextyml: User_00007.yml
+err: null

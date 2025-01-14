@@ -1,0 +1,116 @@
+btime: 2025-01-07T03:00:00+09:00
+etime: 2025-01-09T03:00:00+09:00
+uetime: 0
+item:
+    - name: Temperature
+      unit: °C
+      vmin: 19
+      vmax: 26
+      vint: 1
+      udev:
+        - devno: 0
+          name: AHT10 X038
+          status: checked
+        - devno: 1
+          name: AHT10 X039
+          status: ""
+        - devno: 3
+          name: SCD41 periodic
+          status: ""
+        - devno: 2
+          name: SCD41 single shot
+          status: ""
+    - name: Humidity
+      unit: '%RH'
+      vmin: 20
+      vmax: 50
+      vint: 1
+      udev:
+        - devno: 0
+          name: AHT10 X038
+          status: checked
+        - devno: 1
+          name: AHT10 X039
+          status: ""
+        - devno: 3
+          name: SCD41 periodic
+          status: ""
+        - devno: 2
+          name: SCD41 single shot
+          status: ""
+    - name: CO2
+      unit: ppm
+      vmin: 0
+      vmax: 4000
+      vint: 1
+      udev:
+        - devno: 3
+          name: SCD41 periodic
+          status: checked
+        - devno: 2
+          name: SCD41 single shot
+          status: checked
+device:
+    - device: 0
+      name: AHT10 X038
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: aht10
+    - device: 1
+      name: AHT10 X039
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: aht10
+    - device: 98
+      name: SCD41 single shot
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        co2: 0
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: scd41
+    - device: 4096
+      name: SCD41 periodic
+      tabletype:
+        device: 0
+        ts: 0001-01-01T00:00:00Z
+        co2: 0
+        temperature: 0
+        humidity: 0
+        status: 0
+      tablename: scd41
+filename: TAH0018.png
+period: 2 days
+fperiod: 172800
+fint: 21600
+div: 2
+method: R
+rhmax: 50
+rhmin: 20
+vhmax: 10
+vhmin: 0
+ymlfiles:
+    - Default_000.yml
+    - User_00001
+    - User_00002
+    - User_00003
+    - User_00004
+    - User_00005
+    - User_00006
+    - User_00007
+    - User_00008
+    - User_00009
+    - User_00010
+    - tmp.yml
+nextyml: User_00011.yml
+err: null

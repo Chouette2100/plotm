@@ -6,7 +6,18 @@
 <input type="submit" value="Display previous" formaction="Measurements?fnc=P" formmethod="POST" style="background-color: khaki">
 <input type="submit" value="Redisplay" formaction="Measurements?fnc=R" formmethod="POST" style="background-color: khaki">
 <input type="submit" value="Display next" formaction="Measurements?fnc=N" formmethod="POST" style="background-color: khaki">
-<input type="submit" value="Display latest" formaction="Measurements?fnc=L" formmethod="POST" style="background-color: khaki">
+<input style="margin-left: 1em;background-color: pink;" type="submit" value="Display latest" formaction="Measurements?fnc=L" formmethod="POST">
+<input style="margin-left: 3em; background-color: aquamarine;" type="submit" value="Restore the settings from" formaction="Measurements?fnc=RS" formmethod="POST" >
+<select name="yml">
+    {{ range $i, $y := .Ymlfiles }}
+    <option value="{{ $y }}">{{ $y }}</option>
+    {{ end }}
+</select>
+<input style="margin-left: 3em; background-color: aquamarine;" type="submit" value="Save the settings in" formaction="Measurements?fnc=SV" formmethod="POST">
+<input style="background-color: gainsboro;" type="text" value="{{ .Nextyml }}" readonly style="width: 100px;" />
+<input style="margin-left: 1px;" type="checkbox" name="current" value="yes" />
+    <label for="current">Set the end time to the time of execution</label>
+
 <br>
 <label for="pet-select">Choose the display period:</label>
 <select name="period" id="period">
@@ -21,15 +32,15 @@
   <option {{ if eq .Period "2 hours" }} selected {{ end }} value="2 hours">2 hours</option>
   <option {{ if eq .Period "1 hour" }} selected {{ end }} value="1 hour">1 hour</option>
   <option {{ if eq .Period "30 minutes" }} selected {{ end }} value="30 minutes">30 minutes</option>
-  <option {{ if eq .Period "15 minutes" }} selected {{ end }} value="15 minutes">5 minutes</option>
+  <option {{ if eq .Period "15 minutes" }} selected {{ end }} value="20 minutes">5 minutes</option>
   <option {{ if eq .Period "10 minutes" }} selected {{ end }} value="10 minutes">10 minutes</option>
-  <option {{ if eq .Period "5 minutes" }} selected {{ end }} value="5 minutes">5 minutes</option>
+  <option {{ if eq .Period "4 minutes" }} selected {{ end }} value="4 minutes">4 minutes</option>
 </select>
 {{/*
 <input id="method" name="method" type="hidden" value="{{ .Method }}">
 */}}
 
-<input id="nterm" name="nterm" type="hidden" value="{{ .Nterm }}">
+{{/*<input id="nterm" name="nterm" type="hidden" value="{{ .Nterm }}">*/}}
 <input id="uetime" name="uetime" type="hidden" value="{{ .Uetime }}">
 <br>
 <table>
@@ -40,7 +51,16 @@
 <td>
 {{ $m := .Method }}
 {{ range $i, $v := .Item }}
-{{ .Name }}<br>
+{{ .Name }}
+<input type="number" name="rng_{{$i}}_min" value="{{.Vmin}}" style="width: 60px;"
+    {{ if eq .Name "CO2" }} step=500 {{ end }}
+    {{ if eq .Name "Humidity" }} step=5 {{ end }}
+    style="text-align: right; margin-left: 2em;" /> -- 
+<input type="number" name="rng_{{$i}}_max" value="{{.Vmax}}" style="width: 60px;"
+    {{ if eq .Name "CO2" }} step=500 {{ end }}
+    {{ if eq .Name "Humidity" }} step=5 {{ end }}
+    style="text-align: right;" />
+<br>
 {{ if eq .Name "Humidity" }}
 <input type="radio" name="method" value="R" {{ if eq $m "R" }}checked{{ end }}>Relative humidity<br>
 <input type="radio" name="method" value="V" {{ if eq $m "V" }}checked{{ end }}>Absolute humidity<br>
