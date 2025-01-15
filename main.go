@@ -53,6 +53,8 @@ v1.0.2	Enable SSL in ServerConfig.yml.
 v1.0.3	Create and update license.
 v1.1.0	Improve the drawing method of Y-axis.
 		Allows saving and loading of configuration data.
+v1.1.1	Fix a bug that humidity upper and lower limits in the configuration file (YmlFiles/*.yml)
+		were not reflected in the graph.
 */
 
 var Chimgfn chan int

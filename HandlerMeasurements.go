@@ -104,6 +104,17 @@ func HandlerMeasurements(w http.ResponseWriter, r *http.Request) {
 			graphd.Etime = time.Now()
 			graphd.Uetime = graphd.Etime.Unix()
 		}
+		for _, it := range graphd.Item {
+			if it.Name == "Humidity" {
+				if it.Unit == "%RH" {
+					graphd.Rhmax = it.Vmax
+					graphd.Rhmin = it.Vmin
+				} else {
+					graphd.Vhmax = it.Vmax
+					graphd.Vhmin = it.Vmin
+				}
+			}
+		}
 	} else {
 		err = ReadYAML("tmp/"+tmpyml, &graphd)
 		if err != nil {
