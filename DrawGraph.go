@@ -8,13 +8,16 @@ import (
 	"log"
 	"math"
 	"os"
+
 	// "strings"
 	// "time"
 
 	// "github.com/go-gorp/gorp"
+	"image/color"
+
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
-	"image/color"
+
 	// "gonum.org/v1/plot/plotutil"
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
@@ -41,7 +44,7 @@ func DrawGraph(graphd Graph) (
 		// } else {
 		// 	rs[k], err = Dbmap.Select(Scd41{}, sqlscd41, graphd.Device[k].Device, graphd.Btime, graphd.Etime)
 		// }
-		sqlst := "SELECT * FROM showroom." + dev.Tablename + " WHERE device = ? "
+		sqlst := "SELECT * FROM " + dev.Tablename + " WHERE device = ? "
 		sqlst += " AND ts BETWEEN ? AND ? "
 		sqlst += " ORDER BY ts "
 		rs[k], err = Dbmap.Select(dev.Tabletype, sqlst, graphd.Device[k].Device, graphd.Btime, graphd.Etime)

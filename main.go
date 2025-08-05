@@ -25,9 +25,11 @@ v1.0.2	Enable SSL in ServerConfig.yml.
 v1.0.3	Create and update license.
 v1.1.0	Improve the drawing method of Y-axis.
 		Allows saving and loading of configuration data.
+v1.1.1  Do not use a specific database.
 */
 
-const version="v010100"
+const version = "v010101"
+
 // AHT10 measurement results
 type Aht10 struct {
 	Device      int

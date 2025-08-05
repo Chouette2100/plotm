@@ -1,5 +1,5 @@
 #
 HTTPport: 7080
 #
-SSLcrt: ${SSLCRT}
-SSLkey: ${SSLKEY}
+#SSLcrt: ${SSLCRT}
+#SSLkey: ${SSLKEY}
